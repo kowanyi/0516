@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(function (){
+        console.log("hi");
+        console.log("POST==>");
+        CallPostAPI();
+        console.log("PUT==>");
+        CallPutAPI();
+        console.log("POST==>")
+        CallPostAPI();
+    });
+
+    function CallPostAPI(){
+        var data  = {"username": "student1","password": "student1"};
+        var url = "https://localhost:7109/api/Account";
+        //console.log(url); //for debug
+        $.ajax({
+            url: url,
+            type: "post",
+            contentType : 'application/json; charset=utf-8', // 要送到server的資料型態
+            data : JSON.stringify(data),
+            //Type: Function(Anything data, String textStatus, jqXHR jqXHR)
+            success: function(data, textStatus, jqXHR) {
+                console.log(JSON.stringify(data));
+            },
+            //Type: Function(jqXHR jqXHR, String textStatus, String errorThrown)
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.status);  //HTTP CODE
+                console.log(JSON.stringify(jqXHR));
+            }
+        });
+    }
+    function CallPutAPI(){
+        var data  = {
+            "id": 1,
+            "username": "student1",
+            "password": "student1",
+            "nickname": "Candy"
+        };
+        var url = "https://localhost:7109/api/Account/1";
+        //console.log(url); //for debug
+        $.ajax({
+            url: url,
+            type: "put",
+            contentType : 'application/json; charset=utf-8', // 要送到server的資料型態
+            data : JSON.stringify(data),
+            //Type: Function(Anything data, String textStatus, jqXHR jqXHR)
+            success: function(data, textStatus, jqXHR) {
+                console.log(JSON.stringify(data));
+            },
+            //Type: Function(jqXHR jqXHR, String textStatus, String errorThrown)
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.status);  //HTTP CODE
+                console.log(JSON.stringify(jqXHR));
+            }
+        });
+    }
+
+
+</script>
+
+</body>
+</html>
